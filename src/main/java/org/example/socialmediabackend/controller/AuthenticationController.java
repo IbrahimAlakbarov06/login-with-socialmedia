@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class AuthenticationController {
     private final JwtService jwtService;
-
     private final AuthenticationService authenticationService;
 
     public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
@@ -86,5 +85,10 @@ public class AuthenticationController {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("/oauth2/failure")
+    public ResponseEntity<?> oauthFailure() {
+        return ResponseEntity.badRequest().body("OAuth2 authentication failed");
     }
 }
